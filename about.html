@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<!-- מציין שזה מסמך HTML5 -->
+
+<html lang="he" dir="rtl">
+<!-- פתיחת תגית HTML | הגדרת שפה עברית | כיוון כתיבה מימין לשמאל -->
+
+<head>
+<!-- פתיחת אזור head – הגדרות כלליות של הדף -->
+
+  <meta charset="UTF-8">
+  <!-- קובע קידוד תווים UTF-8 (תמיכה בעברית וסימנים מיוחדים) -->
+
+  <title>על המערכת</title>
+  <!-- כותרת הדף שמופיעה בלשונית הדפדפן -->
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- התאמת הדף למסכים שונים (רספונסיבי) -->
+
+  <!-- Bootstrap CSS -->
+  <!-- הערה: חיבור לספריית Bootstrap -->
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- סגירת תגית link -->
+
+  <!-- Custom CSS -->
+  <!-- הערה: חיבור לקובץ עיצוב משלך -->
+
+  <link rel="stylesheet" href="css/style.css">
+  <!-- קישור לקובץ CSS מקומי -->
+</head>
+<!-- סגירת אזור head -->
+
+<body>
+<!-- פתיחת גוף הדף – כל מה שמוצג למשתמש -->
+
+  <!-- Navbar -->
+  <!-- הערה: תפריט ניווט עליון -->
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <!-- פתיחת תפריט ניווט | נפתח במסכים גדולים | צבע כהה -->
+
+    <div class="container">
+    <!-- עוטף את התוכן ומגביל רוחב -->
+
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <!-- לוגו האתר | מסודר בשורה | קישור לדף הבית -->
+
+        <img src="img/logo.png" alt="לוגו חניון" class="logo-img me-2">
+        <!-- תמונת לוגו | טקסט חלופי | רווח בצד -->
+
+        מערכת ניתוב חניונים
+        <!-- טקסט שם המערכת -->
+      </a>
+      <!-- סגירת קישור הלוגו -->
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <!-- כפתור פתיחת תפריט במובייל -->
+
+        <span class="navbar-toggler-icon"></span>
+        <!-- אייקון של תפריט (שלוש שורות) -->
+      </button>
+      <!-- סגירת כפתור -->
+
+      <div class="collapse navbar-collapse" id="mainNav">
+      <!-- אזור תפריט שמתקפל ונפתח -->
+
+        <ul class="navbar-nav">
+        <!-- פתיחת רשימת קישורים -->
+
+          <li class="nav-item">
+          <!-- פריט תפריט -->
+            <a class="nav-link" href="index.html">בית</a>
+            <!-- קישור לדף הבית -->
+          </li>
+          <!-- סגירת פריט -->
+
+          <li class="nav-item">
+            <a class="nav-link" href="parking.html">חניונים</a>
+            <!-- קישור לדף חניונים -->
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" href="about.html">על המערכת</a>
+            <!-- קישור לדף נוכחי -->
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="contact.html">צור קשר</a>
+            <!-- קישור לדף צור קשר -->
+          </li>
+
+        </ul>
+        <!-- סגירת רשימת קישורים -->
+
+        <ul class="navbar-nav ms-auto">
+        <!-- רשימה שנדחפת לקצה (ימין/שמאל אוטומטי) -->
+
+          <li id="nav-login" class="nav-item">
+            <a class="nav-link" href="login.html">התחברות</a>
+            <!-- קישור להתחברות -->
+          </li>
+
+          <li id="nav-register" class="nav-item">
+            <a class="nav-link" href="register.html">הרשמה</a>
+            <!-- קישור להרשמה -->
+          </li>
+
+          <li id="nav-profile" class="nav-item d-none">
+          <!-- פריט מוסתר כברירת מחדל -->
+            <a class="nav-link" href="profile.html">👤 אזור אישי</a>
+            <!-- קישור לאזור אישי -->
+          </li>
+
+          <li id="nav-logout" class="nav-item d-none">
+          <!-- פריט מוסתר להתנתקות -->
+            <a class="nav-link" href="#" id="logout-btn">התנתקות</a>
+            <!-- כפתור התנתקות -->
+          </li>
+
+        </ul>
+        <!-- סגירת רשימת משתמש -->
+
+      </div>
+      <!-- סגירת אזור collapse -->
+
+    </div>
+    <!-- סגירת container -->
+
+  </nav>
+  <!-- סגירת navbar -->
+
+  <header class="hero-section d-flex align-items-center">
+    <div class="container text-center text-light">
+      <h1 class="mb-3">על המערכת</h1>
+      <p class="lead mb-4">למדו עוד על החזון, הפתרונות, והטכנולוגיה שמאחורי מערכת ניתוב החניונים החכמה.</p>
+    </div>
+  </header>
+
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="mb-4 text-center">החזון שלנו</h2>
+      <p class="lead">מערכת ניתוב החניונים שלנו שואפת לשנות את הדרך שבה אנשים מוצאים חניה, חוסכים זמן ומפחיתים את הלחץ הכרוך בכך.</p>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <h2 class="mb-4 text-center">מה קיים היום בשוק?</h2>
+      <p>כיום, רוב מערכות החניה מתמקדות במתן מידע מוגבל על זמינות חניות, ללא אינטגרציה מלאה עם מערכות ניווט או מתן פתרונות בזמן אמת.</p>
+    </div>
+  </section>
+
+  <section class="py-5 bg-light">
+    <div class="container">
+      <h2 class="mb-4 text-center">למה הפתרון שלנו טוב יותר?</h2>
+      <ul>
+        <li>עדכונים בזמן אמת על זמינות חניות.</li>
+        <li>אינטגרציה מלאה עם אפליקציות ניווט כמו Waze ו-Google Maps.</li>
+        <li>ממשק משתמש ידידותי ונוח.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="py-5">
+    <div class="container">
+      <h2 class="mb-4 text-center">איך המערכת עובדת?</h2>
+      <p>המערכת שלנו משתמשת בחיישנים מתקדמים ובאלגוריתמים חכמים כדי לזהות חניות פנויות ולהעביר את המידע ישירות לאפליקציה שלך.
+        
+        כך, תוכל למצוא חניה במהירות ובקלות.</p>
+    </div>
+  </section>
+
+  <footer class="py-3 bg-dark text-light text-center">
+    <div class="container">
+      <small>© 2025 מערכת ניתוב חניונים חכמה</small>
+    </div>
+  </footer>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- חיבור Bootstrap לעיצוב מוכן -->
+
+  <link rel="stylesheet" href="style.css">
+  <!-- חיבור לקובץ CSS מותאם אישית -->
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <!-- ספריית Firebase הראשית – חובה -->
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+  <!-- טעינת Firebase Core -->
+
+  <!-- Include only the Firebase features as you need in your app -->
+  <!-- טעינת שירותים נדרשים בלבד -->
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js"></script>
+  <!-- Firebase Authentication (התחברות משתמשים) -->
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+  <!-- Firebase Realtime Database (נתונים בזמן אמת) -->
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+<!-- סגירת תגית body -->
+
+</html>
+<!-- סגירת תגית html -->

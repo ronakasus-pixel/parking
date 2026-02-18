@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>סטטוס חניון בזמן אמת</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <img src="img/logo.png" alt="לוגו חניון" class="logo-img me-2" style="height: 40px;">
+      מערכת ניתוב חניונים
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav">
+        <li class="nav-item"><a class="nav-link" href="index.html">בית</a></li>
+        <li class="nav-item"><a class="nav-link" href="parking.html">חניונים</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">על המערכת</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">צור קשר</a></li>
+      </ul>
+      <ul class="navbar-nav ms-auto">
+        <li id="nav-login" class="nav-item"><a class="nav-link" href="login.html">התחברות</a></li>
+        <li id="nav-register" class="nav-item"><a class="nav-link" href="register.html">הרשמה</a></li>
+        <li id="nav-profile" class="nav-item d-none"><a class="nav-link" href="profile.html">👤 אזור אישי</a></li>
+        <li id="nav-logout" class="nav-item d-none"><a class="nav-link" href="#" id="logout-btn">התנתקות</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main class="py-5 bg-light">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h1 class="h3">לוח בקרה וחיישנים</h1>
+      <p class="text-muted">סטטוס חניות בזמן אמת מה-Altera</p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm text-center border-0">
+          <div class="card-body">
+            <div class="mb-3"><span style="font-size: 3rem;">🚗</span></div>
+            <h5 class="card-title">חניה 1</h5>
+            <div id="status-spot-1" class="p-3 mb-3 text-white rounded bg-success fw-bold">פנוי</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm text-center border-0">
+          <div class="card-body">
+            <div class="mb-3"><span style="font-size: 3rem;">🚗</span></div>
+            <h5 class="card-title">חניה 2</h5>
+            <div id="status-spot-2" class="p-3 mb-3 text-white rounded bg-success fw-bold">פנוי</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm text-center border-0">
+          <div class="card-body">
+            <div class="mb-3"><span style="font-size: 3rem;">🚗</span></div>
+            <h5 class="card-title">חניה 3</h5>
+            <div id="status-spot-3" class="p-3 mb-3 text-white rounded bg-success fw-bold">פנוי</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm text-center border-0">
+          <div class="card-body">
+            <div class="mb-3"><span style="font-size: 3rem;">🚗</span></div>
+            <h5 class="card-title">חניה 4</h5>
+            <div id="status-spot-4" class="p-3 mb-3 text-white rounded bg-success fw-bold">פנוי</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm text-center border-0">
+          <div class="card-body">
+            <div class="mb-3"><span style="font-size: 3rem;">🚗</span></div>
+            <h5 class="card-title">חניה 5</h5>
+            <div id="status-spot-5" class="p-3 mb-3 text-white rounded bg-success fw-bold">פנוי</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card h-100 shadow-sm text-center border-0">
+          <div class="card-body">
+            <div class="mb-3"><span style="font-size: 3rem;">🚗</span></div>
+            <h5 class="card-title">חניה 6</h5>
+            <div id="status-spot-6" class="p-3 mb-3 text-white rounded bg-success fw-bold">פנוי</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+  <div class="card h-100 shadow-sm text-center border-0">
+    <div class="card-body">
+      <div class="mb-3"><span style="font-size: 3rem;">🚧</span></div>
+      <h5 class="card-title">בקרת שער</h5>
+      <div id="status-gate" class="p-3 mb-3 text-white rounded bg-secondary fw-bold">טוען סטטוס...</div>
+      
+      <div class="d-grid gap-2">
+        <button id="gate-up-btn" class="btn btn-success btn-lg px-4">פתח שער</button>
+      </div>
+      <small class="text-muted mt-2 d-block">השער ייסגר אוטומטית לאחר 10 שניות</small>
+    </div>
+  </div>
+</div>
+<div class="col-md-6">
+  <div class="card h-100 shadow-sm text-center border-0">
+    <div class="card-body">
+      <div class="mb-3"><span style="font-size: 3rem;">📏</span></div>
+      <h5 class="card-title">חיישן מרחק (כניסה)</h5>
+      <div id="distance-status" class="p-3 mb-2 text-white rounded bg-secondary fw-bold">טוען נתונים...</div>
+      <div id="distance-value" class="text-muted small">מרחק: -- ס"מ</div>
+    </div>
+  </div>
+</div>
+
+    </div>
+  </div>
+</main>
+
+<footer class="py-3 bg-dark text-light text-center">
+  <div class="container">
+    <small>©️ 2026 מערכת ניתוב חניונים חכמה</small>
+  </div>
+</footer>
+
+<script type="module" src="script.js"></script>
+
+</body>
+</html>

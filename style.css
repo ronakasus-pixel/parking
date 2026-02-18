@@ -1,0 +1,226 @@
+/* --- Root Variables for Color Palette --- */
+/* הגדרת משתני CSS גלובליים לצבעים */
+
+:root {
+  --primary-color: #0d6efd; /* צבע ראשי – כחול */
+  --secondary-color: #e9f5ff; /* צבע משני – כחול בהיר */
+  --background-color: #ffffff; /* צבע רקע – לבן */
+  --light-gray: #f8f9fa; /* אפור בהיר מאוד */
+  --text-color: #212529; /* צבע טקסט – אפור כהה */
+  --heading-color: #0056b3; /* צבע כותרות – כחול כהה */
+  --success-color: #198754; /* צבע הצלחה – ירוק */
+  --error-color: #dc3545; /* צבע שגיאה – אדום */
+}
+
+/* --- Base Reset & Typography --- */
+/* הגדרות בסיס לטקסט ולעמוד */
+
+body {
+  font-family: 'Roboto', system-ui, sans-serif; /* גופן ראשי */
+  background: var(--light-gray); /* צבע רקע כללי */
+  color: var(--text-color); /* צבע טקסט */
+  margin: 0; /* ביטול מרווח חיצוני */
+  padding: 0; /* ביטול ריפוד פנימי */
+  line-height: 1.6; /* גובה שורה לקריאות */
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--heading-color); /* צבע כותרות */
+  font-weight: 700; /* טקסט מודגש */
+}
+
+p, a, li {
+  color: var(--text-color); /* צבע לפסקאות, קישורים ורשימות */
+}
+
+/* --- NAVBAR --- */
+/* עיצוב סרגל ניווט */
+
+.navbar {
+  background: var(--primary-color); /* רקע כחול */
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15); /* צל תחתון */
+}
+
+.navbar-brand {
+  font-size: 1.5rem; /* גודל טקסט */
+  font-weight: 600; /* עובי טקסט */
+  color: var(--background-color); /* צבע לבן */
+}
+
+.nav-link {
+  color: var(--background-color) !important; /* צבע קישורים לבן */
+  transition: 0.3s; /* אנימציית מעבר */
+}
+
+.nav-link:hover {
+  color: rgba(255, 255, 255, 0.8) !important; /* צבע בריחוף */
+  transform: translateY(-2px); /* הזזה קלה למעלה */
+}
+
+/* --- BUTTONS --- */
+/* עיצוב כפתורים */
+
+.btn-primary {
+  background: var(--primary-color); /* רקע כחול */
+  color: var(--background-color); /* טקסט לבן */
+  border: none; /* בלי מסגרת */
+  border-radius: 50px; /* כפתור עגול */
+  padding: 10px 20px; /* רווח פנימי */
+  font-size: 1rem; /* גודל טקסט */
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4); /* צל */
+  transition: 0.3s; /* אנימציה */
+}
+
+.btn-primary:hover {
+  background: #0056b3; /* כחול כהה בריחוף */
+  box-shadow: 0 6px 16px rgba(13, 110, 253, 0.6); /* צל חזק */
+}
+
+.btn-outline-primary {
+  background: var(--background-color); /* רקע לבן */
+  color: var(--primary-color); /* טקסט כחול */
+  border: 2px solid var(--primary-color); /* מסגרת כחולה */
+  border-radius: 50px; /* עיגול */
+  padding: 10px 20px; /* רווח פנימי */
+  font-size: 1rem; /* גודל טקסט */
+  transition: 0.3s; /* אנימציה */
+}
+
+.btn-outline-primary:hover {
+  background: var(--primary-color); /* רקע כחול */
+  color: var(--background-color); /* טקסט לבן */
+  box-shadow: 0 4px 12px rgba(13, 110, 253, 0.4); /* צל */
+}
+
+/* --- CARDS --- */
+/* עיצוב כרטיסים */
+
+.card {
+  background: var(--background-color); /* רקע לבן */
+  border: none; /* בלי מסגרת */
+  border-radius: 12px; /* פינות מעוגלות */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); /* צל */
+  padding: 20px; /* רווח פנימי */
+  transition: 0.3s; /* אנימציה */
+}
+
+.card:hover {
+  transform: translateY(-4px); /* הרמה קלה */
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15); /* צל חזק */
+}
+
+/* --- INPUTS --- */
+/* עיצוב שדות קלט */
+
+input, textarea, select {
+  border: 1px solid #ced4da; /* מסגרת אפורה */
+  border-radius: 8px; /* פינות עגולות */
+  padding: 10px; /* רווח פנימי */
+  font-size: 1rem; /* גודל טקסט */
+  width: 100%; /* רוחב מלא */
+  transition: border-color 0.3s, box-shadow 0.3s; /* אנימציה */
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--primary-color); /* מסגרת כחולה */
+  box-shadow: 0 0 4px rgba(13, 110, 253, 0.4); /* הבלטה */
+  outline: none; /* ביטול מסגרת ברירת מחדל */
+}
+
+/* --- HERO SECTION --- */
+/* אזור פתיחה ראשי */
+
+.hero-section {
+  min-height: 75vh; /* גובה מינימלי */
+  background-image: url("../img/parkingbg.png"); /* תמונת רקע */
+  background-size: cover; /* התאמה למסך */
+  background-position: center; /* מיקום מרכזי */
+  position: relative; /* בסיס לשכבת כיסוי */
+  display: flex; /* שימוש ב-flex */
+  align-items: center; /* יישור אנכי */
+  text-align: center; /* יישור טקסט */
+  color: var(--background-color); /* טקסט לבן */
+}
+
+.hero-section::before {
+  content: ""; /* שכבת כיסוי */
+  position: absolute; /* מיקום מוחלט */
+  inset: 0; /* מילוי מלא */
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)); /* כהות */
+}
+
+.hero-section h1 {
+  font-size: 2.8rem; /* גודל כותרת */
+  text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4); /* צל טקסט */
+}
+
+.hero-section p {
+  font-size: 1.3rem; /* גודל פסקה */
+  opacity: 0.9; /* שקיפות קלה */
+}
+
+/* --- FOOTER --- */
+/* עיצוב פוטר */
+
+footer {
+  background: var(--primary-color); /* רקע כחול */
+  color: var(--background-color); /* טקסט לבן */
+  padding: 20px 0; /* רווח אנכי */
+  text-align: center; /* יישור למרכז */
+  box-shadow: 0 -3px 12px rgba(0, 0, 0, 0.15); /* צל עליון */
+}
+
+footer small {
+  font-size: 0.9rem; /* טקסט קטן */
+}
+
+/* --- ALERTS --- */
+/* הודעות מערכת */
+
+.alert {
+  border-radius: 8px; /* פינות עגולות */
+  padding: 15px; /* רווח פנימי */
+  font-size: 1rem; /* גודל טקסט */
+}
+
+.alert-success {
+  background: var(--success-color); /* ירוק */
+  color: var(--background-color); /* לבן */
+}
+
+.alert-danger {
+  background: var(--error-color); /* אדום */
+  color: var(--background-color); /* לבן */
+}
+
+/* --- UTILITY CLASSES --- */
+/* מחלקות עזר */
+
+.bg-light-gray {
+  background: var(--light-gray); /* רקע אפור בהיר */
+}
+
+.text-primary {
+  color: var(--primary-color) !important; /* טקסט כחול */
+}
+
+.text-secondary {
+  color: var(--secondary-color) !important; /* טקסט כחול בהיר */
+}
+
+.mt-3 {
+  margin-top: 1rem !important; /* מרווח עליון */
+}
+
+.mb-3 {
+  margin-bottom: 1rem !important; /* מרווח תחתון */
+}
+
+.py-5 {
+  padding: 3rem 0 !important; /* רווח אנכי */
+}
+
+/* Tables RTL */
+table {
+  direction: rtl; /* כיוון טבלה מימין לשמאל */
+}
