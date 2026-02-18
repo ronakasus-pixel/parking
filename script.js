@@ -98,17 +98,14 @@ onAuthStateChanged(auth, (user) => {
 
 // --- עדכונים בזמן אמת (Real-time Updates) ---
 
-// 1. האזנה לסטטוס החניות המאוחד מה-Altera (ערך 0-63)
+// 1. האזנה לסטטוס החניות
 const alteraRef = ref(database, 'fromAltera/C');
 onValue(alteraRef, (snapshot) => {
   const totalStatus = snapshot.val() || 0;
-
   for (let i = 1; i <= 6; i++) {
     const div = document.getElementById(`status-spot-${i}`);
     if (!div) continue;
-
     const isOccupied = (totalStatus & (1 << (i - 1))) !== 0;
-
     if (isOccupied) {
       div.innerText = 'תפוס';
       div.className = "p-3 mb-3 text-white rounded bg-danger fw-bold";
@@ -119,52 +116,55 @@ onValue(alteraRef, (snapshot) => {
   }
 });
 
-// 2. בקרת שער - פתיחה ידנית וסגירה אוטומטית (נתיב toAltera)
-const gateUpBtn = document.getElementById("gate-up-btn");
-if (gateUpBtn) {
-  const toAlteraRef = ref(database, 'toAltera');
-
-  gateUpBtn.addEventListener("click", () => {
-    // הרמת השער - שליחת 1 ל-Firebase
-    set(toAlteraRef, 1)
-      .then(() => {
-        console.log("Gate opened. Timer started for 10 seconds.");
-        
-        // סגירה אוטומטית לאחר 10 שניות
-        setTimeout(() => {
-          set(toAlteraRef, 0)
-            .then(() => console.log("Gate closed automatically after 10s."))
-            .catch((err) => console.error("Auto-close error:", err));
-        }, 10000); 
-      })
-      .catch((error) => alert("שגיאה בפתיחת השער: " + error.message));
-  });
-}
-
-// 3. עדכון תצוגת סטטוס השער באתר
-// עדכון סטטוס שער וחיישן מרחק משולב
+// --- לוגיקת שער משולבת (חיישן + כפתור) ---
 const gateStatusDiv = document.getElementById("status-gate");
-const distanceRef = ref(database, 'fromAltera/A');
+const gateUpBtn = document.getElementById("gate-up-btn");
 
 if (gateStatusDiv) {
-  onValue(distanceRef, (snapshot) => {
-    const distance = snapshot.val() || 0;
-    
-    // לוגיקה משולבת: השער נפתח כשמישהו קרוב
-    if (distance < 20 && distance > 0) {
-      gateStatusDiv.textContent = "שער פתוח - מזוהה רכב";
-      gateStatusDiv.className = "p-3 mb-3 text-white rounded bg-warning fw-bold"; // צהוב/כתום
+  const toAlteraRef = ref(database, 'toAltera');
+  const distanceRef = ref(database, 'fromAltera/A');
+
+  const updateGateUI = (isGateForcedOpen, distance) => {
+    const isClose = distance < 20 && distance > 0;
+    if (isGateForcedOpen === 1 || isClose) {
+      let message = "שער פתוח";
+      if (isClose && isGateForcedOpen !== 1) message += " - רכב מזוהה";
+      if (isGateForcedOpen === 1 && !isClose) message += " - פתיחה ידנית";
+      gateStatusDiv.textContent = message;
+      gateStatusDiv.className = "p-3 mb-3 text-white rounded bg-warning fw-bold";
     } else {
       gateStatusDiv.textContent = "שער סגור";
-      gateStatusDiv.className = "p-3 mb-3 text-white rounded bg-secondary fw-bold"; // אפור
+      gateStatusDiv.className = "p-3 mb-3 text-white rounded bg-secondary fw-bold";
     }
-    
-    // אם הוספת את הריבוע של חיישן המרחק מההודעה הקודמת, אפשר לעדכן גם אותו כאן
-    const distanceValueDiv = document.getElementById("distance-value");
-    if (distanceValueDiv) {
-      distanceValueDiv.textContent = `מרחק נוכחי: ${distance} ס"מ`;
-    }
+  };
+
+  let lastGateValue = 0;
+  let lastDistanceValue = 100;
+
+  onValue(toAlteraRef, (snapshot) => {
+    lastGateValue = snapshot.val() || 0;
+    updateGateUI(lastGateValue, lastDistanceValue);
   });
+
+  onValue(distanceRef, (snapshot) => {
+    lastDistanceValue = snapshot.val() || 0;
+    updateGateUI(lastGateValue, lastDistanceValue);
+  });
+
+  if (gateUpBtn) {
+    gateUpBtn.addEventListener("click", () => {
+      set(toAlteraRef, 1)
+        .then(() => {
+          console.log("Gate forced open via button.");
+          setTimeout(() => {
+            set(toAlteraRef, 0)
+              .then(() => console.log("Manual open period ended."))
+              .catch((err) => console.error("Auto-close error:", err));
+          }, 10000); 
+        })
+        .catch((error) => alert("שגיאה בהפעלת השער: " + error.message));
+    });
+  }
 }
 
 // 4. עדכון סטטוס תאורה
@@ -182,27 +182,22 @@ if (lightStatusDiv) {
     }
   });
 }
-// 5. עדכון חיישן מרחק (נתיב fromAltera/A)
+
+// 5. עדכון חיישן מרחק
 const distanceStatusDiv = document.getElementById("distance-status");
 const distanceValueDiv = document.getElementById("distance-value");
 
 if (distanceStatusDiv) {
   const distanceRef = ref(database, 'fromAltera/A');
   onValue(distanceRef, (snapshot) => {
-    const distance = snapshot.val() || 0; // קבלת הערך מהענף A
-    
-    // עדכון תצוגת המרחק המדויק
-    if (distanceValueDiv) {
-      distanceValueDiv.textContent = `מרחק: ${distance} ס"מ`;
-    }
-
-    // לוגיקה: אם המרחק קטן מ-20 ס"מ
+    const distance = snapshot.val() || 0;
+    if (distanceValueDiv) distanceValueDiv.textContent = `מרחק: ${distance} ס"מ`;
     if (distance < 20) {
       distanceStatusDiv.innerText = 'יש מישהו מול השער';
-      distanceStatusDiv.className = "p-3 mb-2 text-white rounded bg-danger fw-bold"; // אדום להתראה
+      distanceStatusDiv.className = "p-3 mb-2 text-white rounded bg-danger fw-bold";
     } else {
       distanceStatusDiv.innerText = 'אין אף אחד מול השער';
-      distanceStatusDiv.className = "p-3 mb-2 text-white rounded bg-success fw-bold"; // ירוק כשהשטח פנוי
+      distanceStatusDiv.className = "p-3 mb-2 text-white rounded bg-success fw-bold";
     }
   });
 }
