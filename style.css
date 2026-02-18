@@ -224,3 +224,34 @@ footer small {
 table {
   direction: rtl; /* כיוון טבלה מימין לשמאל */
 }
+
+/* עיצוב ייחודי לסטטוסים - מראה של לוח תצוגה */
+.status-display {
+    border-radius: 8px;
+    border: 2px solid rgba(0,0,0,0.1);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.05); /* צל פנימי נותן תחושת עומק של מסך */
+    cursor: default; /* מונע סימן של יד, כי זה לא לחיץ */
+    letter-spacing: 0.5px;
+}
+
+/* עיצוב ייחודי ללחצנים - מראה אינטראקטיבי */
+.action-button {
+    border-radius: 50px !important; /* כפתור עגול יותר */
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.2s ease-in-out !important;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); /* צל חיצוני בולט */
+    border: 2px solid transparent !important;
+}
+
+.action-button:hover {
+    transform: translateY(-2px); /* קופץ קצת למעלה בריחוף */
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+    filter: brightness(1.1); /* נהיה קצת יותר בהיר */
+}
+
+.action-button:active {
+    transform: translateY(1px); /* שוקע בלחיצה */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}

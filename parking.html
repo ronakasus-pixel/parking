@@ -108,17 +108,23 @@
         </div>
       </div>
 
-      <div class="col-md-6">
+<div class="col-md-6">
   <div class="card h-100 shadow-sm text-center border-0">
     <div class="card-body">
       <div class="mb-3"><span style="font-size: 3rem;">🚧</span></div>
-      <h5 class="card-title">בקרת שער</h5>
-      <div id="status-gate" class="p-3 mb-3 text-white rounded bg-secondary fw-bold">טוען סטטוס...</div>
+      <h5 class="card-title mb-4">בקרת שער</h5>
       
-      <div class="d-grid gap-2">
-        <button id="gate-up-btn" class="btn btn-success btn-lg px-4">פתח שער</button>
+      <div class="d-grid gap-2 mb-4">
+        <button id="gate-up-btn" class="btn btn-success btn-lg action-button px-4">
+          🚀 פתח שער
+        </button>
       </div>
-      <small class="text-muted mt-2 d-block">השער ייסגר אוטומטית לאחר 10 שניות</small>
+
+      <div id="status-gate" class="status-display p-3 text-white rounded bg-secondary fw-bold">
+        טוען סטטוס...
+      </div>
+      
+      <small class="text-muted mt-3 d-block">נסגר אוטומטית לאחר 10 שניות</small>
     </div>
   </div>
 </div>

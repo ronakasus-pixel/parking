@@ -124,19 +124,24 @@ if (gateStatusDiv) {
   const toAlteraRef = ref(database, 'toAltera');
   const distanceRef = ref(database, 'fromAltera/A');
 
-  const updateGateUI = (isGateForcedOpen, distance) => {
-    const isClose = distance < 20 && distance > 0;
-    if (isGateForcedOpen === 1 || isClose) {
-      let message = "שער פתוח";
-      if (isClose && isGateForcedOpen !== 1) message += " - רכב מזוהה";
-      if (isGateForcedOpen === 1 && !isClose) message += " - פתיחה ידנית";
-      gateStatusDiv.textContent = message;
-      gateStatusDiv.className = "p-3 mb-3 text-white rounded bg-warning fw-bold";
-    } else {
-      gateStatusDiv.textContent = "שער סגור";
-      gateStatusDiv.className = "p-3 mb-3 text-white rounded bg-secondary fw-bold";
-    }
-  };
+ const updateGateUI = (isGateForcedOpen, distance) => {
+  const isClose = distance < 20 && distance > 0;
+  
+  // שמירה על הקלאס status-display כדי שהעיצוב לא ייעלם כשהצבע משתנה
+  const baseClasses = "status-display p-3 mb-4 text-white rounded fw-bold";
+  
+  if (isGateForcedOpen === 1 || isClose) {
+    let message = "שער פתוח";
+    if (isClose && isGateForcedOpen !== 1) message += " - רכב מזוהה";
+    if (isGateForcedOpen === 1 && !isClose) message += " - פתיחה ידנית";
+    
+    gateStatusDiv.textContent = message;
+    gateStatusDiv.className = `${baseClasses} bg-warning`; // צהוב/כתום
+  } else {
+    gateStatusDiv.textContent = "שער סגור";
+    gateStatusDiv.className = `${baseClasses} bg-secondary`; // אפור
+  }
+};
 
   let lastGateValue = 0;
   let lastDistanceValue = 100;
